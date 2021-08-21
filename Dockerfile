@@ -9,8 +9,8 @@ ARG JAR_FILE=target/*.jar
 
 COPY ${JAR_FILE} app.jar
 
-ENTRYPOINT ["java","-jar","/app.jar"]
-
+#ENTRYPOINT ["java","-jar","/app.jar", "--spring.datasource.url="jdbc:mysql://mysql:3306/powerstation?useSSL=false""]
+ENTRYPOINT java -jar /app.jar --spring.datasource.url="jdbc:mysql://mysql:3306/powerstation?useSSL=false"
 # docker build -t kuangyu0801/powerstation-spring-backend .
 # makre sure container runs in the same network as mysql (assume power-net)
 # docker run --network power-net -d -p 8080:8080 kuangyu0801/powerstation-spring-backend
