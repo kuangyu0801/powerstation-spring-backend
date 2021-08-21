@@ -22,4 +22,14 @@ public class Station {
 
     @Column(name = "reach")
     private Integer reach;
+
+    public Station() {
+    }
+
+    public Station(Integer id, Integer x, Integer y, Integer reach) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.reach = reach;
+    }
 }

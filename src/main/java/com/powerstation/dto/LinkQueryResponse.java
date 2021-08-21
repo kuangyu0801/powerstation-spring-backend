@@ -10,4 +10,8 @@ public class LinkQueryResponse {
     private Integer yStation;
     private Double power;
     private Boolean isLinkFound;
+
+    public LinkQueryResponse() {
+        isLinkFound = false;
+    }
 }
