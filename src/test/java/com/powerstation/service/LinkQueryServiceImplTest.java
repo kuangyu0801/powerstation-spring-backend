@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 // JUnit5 annotation
 @ExtendWith(MockitoExtension.class)
@@ -54,5 +54,26 @@ public class LinkQueryServiceImplTest {
         LinkQuery linkQuery = new LinkQuery(100, 100);
         LinkQueryResponse linkQueryResponse = LinkQueryServiceImpl.findLink(linkQuery);
         assertEquals(false, linkQueryResponse.getIsLinkFound());
+    }
+
+    @Test
+    public void repositoryCalled() {
+        init();
+        LinkQuery linkQuery = new LinkQuery(100, 100);
+        LinkQueryResponse linkQueryResponse = LinkQueryServiceImpl.findLink(linkQuery);
+        // make sure findAll method is only called one time
+        verify(stationRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void calDistanceZero() {
+        Double rst = LinkQueryServiceImpl.calDistance(1, 1, 1, 1);
+        assertEquals(0.0, rst);
+    }
+
+    @Test
+    public void calDistanceNonZero() {
+        Double rst = LinkQueryServiceImpl.calDistance(1, 0, 1, 0);
+        assertEquals(Math.sqrt(2), rst);
     }
 }
