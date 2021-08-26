@@ -15,3 +15,8 @@ What are the difference among @Mock, @MockBean, @MockInject?
 @InjectMocks creates an instance of the class and injects the mocks that are created with the @mock (or @SPY) annotations into this instance.
 With JUnit 5, you must use @ExtendWith(MockitoExtension.class).
 @MockBean to add mock objects to the Spring application context. The mock will replace any existing bean of the same type in the application context.
+
+- Readable
+- Simple
+- Isolated
+- Frequent-ran
