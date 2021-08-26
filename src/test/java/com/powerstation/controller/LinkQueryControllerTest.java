@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -62,6 +63,12 @@ public class LinkQueryControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("{isLinkFound:false}"))
                 .andReturn();
+
+        String actual = result.getResponse().getContentAsString();
+        String expect = "{isLinkFound:false}";
+        // equivalent to andExpect but doesn't require escape character
+        JSONAssert.assertEquals(expect, actual, false);
+
         ArgumentCaptor<LinkQuery> captor = ArgumentCaptor.forClass(LinkQuery.class);
 
         // verify the service received exact query
